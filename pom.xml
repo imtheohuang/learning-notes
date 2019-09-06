@@ -23,6 +23,7 @@
     <modules>
         <module>netty-demo</module>
         <module>java-base</module>
+        <module>netty-file-server</module>
     </modules>
 
 
