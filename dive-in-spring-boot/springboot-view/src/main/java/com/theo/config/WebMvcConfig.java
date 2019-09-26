@@ -1,5 +1,7 @@
 package com.theo.config;
 
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -7,6 +9,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.io.File;
 
 /**
  * @author huangsuixin
@@ -30,5 +34,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         // 优先级高于 ThymeleafViewResolver
         return viewResolver;
+    }
+
+    @Bean
+    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> customizer() {
+        return factory -> {
+            factory.addContextCustomizers(context -> {
+                String relativePath = "springboot-view/src/main/webapp";
+                File docBaseFile = new File(relativePath);
+                if (docBaseFile.exists()) {
+                    context.setDocBase(docBaseFile.getAbsolutePath());
+                }
+            });
+        };
     }
 }

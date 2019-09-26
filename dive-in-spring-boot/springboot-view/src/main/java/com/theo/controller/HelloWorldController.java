@@ -3,6 +3,7 @@ package com.theo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author huangsuixin
@@ -26,4 +27,9 @@ public class HelloWorldController {
         return "index";
     }
 
+    @RequestMapping("test")
+    @ResponseBody
+    public String test() {
+        return "HE";
+    }
 }
