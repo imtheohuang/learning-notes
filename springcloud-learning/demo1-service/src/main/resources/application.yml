@@ -1,0 +1,17 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: demo1-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    # 每隔多长时间发送心跳
+    lease-renewal-interval-in-seconds: 5
+    # 服务端隔多长时间没收到心跳，表明已经服务down掉了
+    lease-expiration-duration-in-seconds: 15
+    # 显示真实的IP地址
+    prefer-ip-address: true

@@ -25,6 +25,8 @@
         <module>java-base</module>
         <module>netty-file-server</module>
         <module>algorithm-learning</module>
+        <module>pattern-learning</module>
+        <module>springcloud-learning</module>
     </modules>
 
 
