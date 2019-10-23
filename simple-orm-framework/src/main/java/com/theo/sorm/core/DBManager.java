@@ -1,6 +1,7 @@
 package com.theo.sorm.core;
 
 import com.theo.sorm.bean.Configuration;
+import com.theo.sorm.pool.DBConnPool;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.util.Properties;
 public class DBManager {
 
     private static Configuration conf;
+
+    private static DBConnPool pool;
 
     static {
         Properties properties = new Properties();
@@ -48,14 +51,10 @@ public class DBManager {
      * @return Connection
      */
     public static Connection getConn() {
-        try {
-            Class.forName(conf.getDriver());
-            // 直接建立连接，后期使用连接池
-            return DriverManager.getConnection(conf.getUrl(), conf.getUser(), conf.getPwd());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        if (pool == null) {
+            pool = new DBConnPool();
         }
+        return pool.getConnection();
     }
 
 
@@ -87,11 +86,16 @@ public class DBManager {
     public static void close(AutoCloseable... closeable) {
         for (AutoCloseable closeable1 : closeable) {
             if (null != closeable1) {
-                try {
-                    closeable1.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (closeable1 instanceof Connection) {
+                    pool.close((Connection) closeable1);
+                } else {
+                    try {
+                        closeable1.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+
             }
         }
     }
