@@ -43,4 +43,10 @@ public class Configuration {
      */
     private String poPackage;
 
+    /**
+     * 项目使用的查询是哪一个类
+     * <p>? extent {@link com.theo.sorm.core.Query}</p>
+     */
+    private String queryClass;
+
 }

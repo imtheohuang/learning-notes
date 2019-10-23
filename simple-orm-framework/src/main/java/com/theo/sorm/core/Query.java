@@ -16,7 +16,7 @@ import java.util.List;
  * @author huangsuixin
  * @date 2019/10/21 21:47
  */
-public abstract class Query {
+public abstract class Query implements Cloneable{
 
     /**
      * 采用模板方法模式，将JDBC 操作封装成模板，便于重用
@@ -279,4 +279,8 @@ public abstract class Query {
      */
     public abstract Object queryPagenate(int pageNum, int size);
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
