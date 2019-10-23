@@ -49,4 +49,13 @@ public class Configuration {
      */
     private String queryClass;
 
+    /**
+     * 连接池中最小的连接数
+     */
+    private int poolMinSize;
+
+    /**
+     * 连接池中最大的连接数
+     */
+    private int poolMaxSize;
 }
