@@ -16,13 +16,14 @@ import java.util.List;
  * @author huangsuixin
  * @date 2019/10/21 21:47
  */
-public abstract class Query implements Cloneable{
+public abstract class Query implements Cloneable {
 
     /**
      * 采用模板方法模式，将JDBC 操作封装成模板，便于重用
-     * @param sql sql
-     * @param params sql 的参数
-     * @param clazz 要封装到的bean
+     *
+     * @param sql      sql
+     * @param params   sql 的参数
+     * @param clazz    要封装到的bean
      * @param callBack 回调方法
      * @return
      */
@@ -231,7 +232,7 @@ public abstract class Query implements Cloneable{
     Object queryUniqueRow(String sql, Class clazz, Object[] params) {
         List list = queryRows(sql, clazz, params);
 
-        return (list == null || list.size() > 0) ? null : list.get(0);
+        return (list != null && list.size() > 0) ? list.get(0) : null;
     }
 
     /**
