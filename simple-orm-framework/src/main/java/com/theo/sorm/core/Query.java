@@ -260,6 +260,21 @@ public abstract class Query implements Cloneable {
     }
 
     /**
+     * 根据主键查询对象
+     *
+     * @param clazz
+     * @param id
+     * @return
+     */
+    Object queryById(Class clazz, Object id) {
+        // select * from
+        TableInfo tableInfo = TableContext.poClassTableMap.get(clazz);
+        ColumnInfo onlyPriKey = tableInfo.getOnlyPriKey();
+        String sql = "select * from " + tableInfo.getTname() + " where " + onlyPriKey.getName() + "=? ";
+        return queryUniqueRow(sql, clazz, new Object[]{id});
+    }
+
+    /**
      * 查询返回一个数字
      *
      * @param sql

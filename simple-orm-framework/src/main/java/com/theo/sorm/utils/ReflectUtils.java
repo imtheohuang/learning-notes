@@ -30,10 +30,13 @@ public class ReflectUtils {
     }
 
     public static void invokeSetter(Object o, String columnName, Object columnValue) {
+
         Method declaredMethod = null;
         try {
-            declaredMethod = o.getClass().getDeclaredMethod("set" + StringUtils.firstCharUpperCase(columnName), columnValue.getClass());
-            declaredMethod.invoke(o, columnValue);
+            if (columnValue != null) {
+                declaredMethod = o.getClass().getDeclaredMethod("set" + StringUtils.firstCharUpperCase(columnName), columnValue.getClass());
+                declaredMethod.invoke(o, columnValue);
+            }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
