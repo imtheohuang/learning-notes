@@ -27,6 +27,7 @@
         <module>algorithm-learning</module>
         <module>pattern-learning</module>
         <module>springcloud-learning</module>
+        <module>simple-orm-framework</module>
     </modules>
 
 
