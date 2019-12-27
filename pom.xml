@@ -28,6 +28,7 @@
         <module>pattern-learning</module>
         <module>springcloud-learning</module>
         <module>simple-orm-framework</module>
+        <module>effective-java-sample</module>
     </modules>
 
 
